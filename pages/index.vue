@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="treeview js-treeview">
-      
+    <div class="treeview js-treeview"> 
     <Tree :dataTree="trees"/>
     </div>
   </div>

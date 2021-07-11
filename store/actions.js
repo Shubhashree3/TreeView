@@ -14,7 +14,6 @@ export default {
           .then((trees)=>{
             trees.forEach((tree)=>{
               if (tree.parentId===id){
-                console.log("here")
                 store.dispatch('deleteNode',tree.id)
               }
               else{
