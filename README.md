@@ -178,5 +178,15 @@ npm run json-server --watch <File Name>
     ]
   }
 ```
-![Alt text](./assets/screenshots/IndexPage.png?raw=true "Title")
-![Alt text](./assets/screenshots/Actions.png?raw=true "Title")
+
+ ### `API Call`
+![Actions.js screenshot](./assets/screenshots/Actions.png?raw=true "Title")
+
+Here addNode action will receive a complete node as argument and make axios post call for adding new node in tree and if its successful in '.then' it calls fetchTree action for showing complete Tree.
+
+editNode action  will accept a node as argument and make axios put call.It takes id of current node which you have to edit and edited items .If axios call is successful, in '.then' it calls fetchTree action to fetch the updated data.
+
+deleteNode action receives id as argument and make axios delete call.It deletes the node with  that id. Then it searches nodes with parentId equal to id we received to delete(searching for the children of the deleted node) and make a recursive call to delete node with all the children found. So calling delete action on a node deletes the node with the tree attached to the node.
+
+
+
