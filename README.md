@@ -21,6 +21,7 @@ You can create the following extra directories, some of which have special behav
 The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
 
 Here main.css is used as default css for all components.
+Screenshots directory contains all screenshots of the code.
 
 ### `components`
 
@@ -43,4 +44,7 @@ This directory contains your Vuex store files. Creating a file in this directory
 - state.js Vuex uses a single state tree - that is, this single object contains all your application level state and serves as the "single source of truth." 
 
 
-![Screenshot](~/assets/screenshots/TreeComponent.png)
+![Alt text](./assets/screenshots/TreeComponent.png?raw=true "Title")
+![Alt text](./assets/screenshots/IndexPage.png?raw=true "Title")
+![Alt text](./assets/screenshots/Actions.png?raw=true "Title")
+![Alt text](./assets/screenshots/FetchTree.png?raw=true "Title")
