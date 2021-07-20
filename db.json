@@ -34,16 +34,6 @@
       "id": 7,
       "parentId": 2,
       "label": "Item 7.2"
-    },
-    {
-      "id": 8,
-      "parentId": 0,
-      "label": "Root 3"
-    },
-    {
-      "id": 9,
-      "label": "Item 9.8",
-      "parentId": "8"
     }
   ]
 }

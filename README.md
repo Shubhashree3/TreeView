@@ -54,7 +54,7 @@ Recursive components are useful for displaying comments on a blog, nested menus,
 
 ![Alt text](./assets/screenshots/TreeComponent.png?raw=true "Title")
 
-Here in line no.18 we call <Tree> component again in <Tree> component recursive call.
+Here in line no.19 we call <Tree> component again in <Tree> component recursive call.
   
  ### `Data Structure`
   
@@ -87,12 +87,12 @@ Here in line no.18 we call <Tree> component again in <Tree> component recursive 
 ```
 
 ```bash
-#run this command to start fake API server
+# Run this command to start fake API server
 # By default the server will serve db.json file located on the root of project
 npm run json:server
 
-#To serve a custom json file, place the file in root of the project
-npm run json-server --watch <File Name>
+# To serve a custom json file, place the file in root of the project
+npm run json-server --watch <FileName>
 ```
   Now if you go to http://localhost:3000/trees/1, you'll get
   
@@ -141,7 +141,7 @@ npm run json-server --watch <File Name>
           "label": "Item 4.3"
         }
       ] 
-     }
+    }
 ```
   
   The data here is a single level array of nodes. Every node has a individual unique id and a parentId attribute.
