@@ -99,19 +99,18 @@ export default {
   props: ['dataTree'],
   methods: {
     addSame(node) {
-      const maxId = this.getMaxId();
       const newNode = {};
-      newNode.id = maxId + 1;
+      newNode.id = new Date().valueOf()
+      console.log(newNode.id)
       newNode.parentId = node.parentId;
-      newNode.label = `Item ${newNode.id}.${newNode.parentId}`;
+      newNode.label = 'New Node';
       this.$store.dispatch('addNode', newNode);
     },
     addSub(node) {
-      const maxId = this.getMaxId();
       const newNode = {};
-      newNode.id = maxId + 1;
+      newNode.id = new Date().valueOf()
       newNode.parentId = node.id;
-      newNode.label = `Item ${newNode.id}.${newNode.parentId}`;
+      newNode.label = 'New Node' ;
       this.$store.dispatch('addNode', newNode);
     },
     deleteNode(id) {
