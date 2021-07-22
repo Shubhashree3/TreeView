@@ -1,7 +1,7 @@
 // Import the `mount()` method from Vue Test Utils
 
-import axios from 'axios';
 import actions from '@/store/actions.js';
+import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import $ from 'jquery';
 import mockData from '@/testData.js';
@@ -13,7 +13,6 @@ import Vuex from 'vuex';
 
 global.$ = $;
 const flushPromises = require('flush-promises');
-
 const localVue = createLocalVue();
 const mockpromiseState = true;
 
@@ -91,34 +90,14 @@ describe('Tree', () => {
     expect(axios.$get).toHaveBeenCalledTimes(2);
   });
 
-  it('Could not edit a Node when pressed to Edit Button and than cancelButton', async () => {
+  it('should click on editButton and event emitted', async () => {
     await flushPromises();
 
     const editNode = wrapper.find('.editButton');
-    const cancelNode = wrapper.find('.cancelButton');
-
     expect(editNode.exists()).toBe(true);
     editNode.trigger('click');
 
-    expect(cancelNode.exists()).toBe(true);
-    cancelNode.trigger('click');
-
-    expect(axios.$put).toHaveBeenCalledTimes(0);
-  });
-
-  it('Could not edit a Node when pressed to Edit Button and than cancelButton', async () => {
-    await flushPromises();
-
-    const editNode = wrapper.find('.editButton');
-    const cancelNode = wrapper.find('.cancelButton');
-
-    expect(editNode.exists()).toBe(true);
-    editNode.trigger('click');
-
-    expect(cancelNode.exists()).toBe(true);
-    cancelNode.trigger('click');
-
-    expect(axios.$put).toHaveBeenCalledTimes(0);
+    expect(wrapper.emitted('edit-node')).toBeTruthy();
   });
 
   it('Delete  a node when delete button preesed', async () => {
@@ -131,6 +110,16 @@ describe('Tree', () => {
     expect(axios.$delete).toBeCalled();
     await flushPromises();
     expect(axios.$get).toHaveBeenCalled();
+  });
+
+  it('Toggles button when clicked to node name', async () => {
+    await flushPromises();
+    const toggleSpan = wrapper.find('.deleteButton');
+
+    expect(toggleSpan.exists()).toBe(true);
+    toggleSpan.trigger('click');
+
+    
   });
 
   it('is a Vue instance', () => {

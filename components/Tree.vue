@@ -3,7 +3,7 @@
     <ul>
       <li :id="node.id" v-for="node in dataTree" :key="node.id">
         <div class="treeview__level" data-level="A">
-          <span class="level-title" @click="toggle(node.id)">{{node.label}}</span>
+          <span class="level-title toggleSpan" @click="toggle(node.id)">{{node.label}}</span>
           <div class="treeview__level-btns">
             <b-button
               variant="outline-danger"
@@ -42,47 +42,10 @@
           </b-button>
           </div>
         </div>
-        <Tree :dataTree="node.childrens"/>
+        <Tree :dataTree="node.childrens" @edit-node = "showModal"/>
       </li>
     </ul>
-    <b-modal
-      title="Edit Tree Node"
-      ref="my-modal"
-      hide-footer
-      header-bg-variant="primary"
-      header-text-variant="light"
-      >
-      <form ref="form">
-        <b-form-group
-          label="New Lable"
-          label-for="label-input"
-          >
-          <b-form-input
-            id="label-input"
-            v-model="tree.label"
-            @keydown.native.enter="submitModal"
-            required>
-          </b-form-input>
-        </b-form-group>
-      </form>
-      <div>
-        <b-button
-          class=" ml-2 mt-3 float-right submitButton"
-          variant="outline-primary"
-          @click="submitModal"
-           >
-          Submit
-        </b-button>
-        <b-button
-          id="toggle-btn"
-          class=" mt-3 float-right cancelButton"
-          variant="outline-danger"
-          @click="hideModal"
-           >
-          Cancel
-        </b-button>
-      </div>
-    </b-modal>
+
   </div>
 </template>
 <script>
@@ -91,7 +54,7 @@ export default {
     return {
       tree: {
         id: '',
-        label: '',
+        label: 'abc',
         parentId: '',
       },
     };
@@ -116,16 +79,7 @@ export default {
       this.$store.dispatch('deleteNode', id);
     },
     showModal(node) {
-      Object.assign(this.tree, node);
-      delete this.tree.childrens;
-      this.$refs['my-modal'].show();
-    },
-    hideModal() {
-      this.$refs['my-modal'].hide();
-    },
-    submitModal() {
-      this.$store.dispatch('editNode', this.tree);
-      this.$refs['my-modal'].hide();
+      this.$emit('edit-node', node);
     },
     toggle(id) {
       const editButton = document.getElementById(`editButton-${id}`);
