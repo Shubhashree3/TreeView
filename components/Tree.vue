@@ -116,15 +116,6 @@ export default {
     deleteNode(id) {
       this.$store.dispatch('deleteNode', id);
     },
-    getMaxId() {
-      let max = 0;
-      this.$store.state.rawTrees.forEach((node) => {
-        if (node.id > max) {
-          max = node.id;
-        }
-      });
-      return max;
-    },
     showModal(node) {
       Object.assign(this.tree, node);
       delete this.tree.childrens;

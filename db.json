@@ -34,6 +34,26 @@
       "id": 7,
       "parentId": 2,
       "label": "Item 7.2"
+    },
+    {
+      "id": 8,
+      "parentId": 7,
+      "label": "Item 8.7"
+    },
+    {
+      "id": 244,
+      "parentId": 1,
+      "label": "Root 2"
+    },
+    {
+      "id": 1626934589779,
+      "parentId": 5,
+      "label": "New Node"
+    },
+    {
+      "id": 1626934593011,
+      "parentId": 1626934589779,
+      "label": "New Node"
     }
   ]
 }

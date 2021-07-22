@@ -1,4 +1,3 @@
 export default () => ({
-  trees: [],
-  rawTrees:[]
+  trees: []
 });
