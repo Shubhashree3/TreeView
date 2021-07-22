@@ -100,17 +100,16 @@ export default {
   methods: {
     addSame(node) {
       const newNode = {};
-      newNode.id = new Date().valueOf()
-      console.log(newNode.id)
+      newNode.id = new Date().valueOf();
       newNode.parentId = node.parentId;
       newNode.label = 'New Node';
       this.$store.dispatch('addNode', newNode);
     },
     addSub(node) {
       const newNode = {};
-      newNode.id = new Date().valueOf()
+      newNode.id = new Date().valueOf();
       newNode.parentId = node.id;
-      newNode.label = 'New Node' ;
+      newNode.label = 'New Node';
       this.$store.dispatch('addNode', newNode);
     },
     deleteNode(id) {

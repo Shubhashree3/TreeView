@@ -1,3 +1,3 @@
 export default {
-  setTrees: (state, trees) => (state.trees = trees)
+  setTrees: (state, trees) => { (state.trees = trees); },
 };
