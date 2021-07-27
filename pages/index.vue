@@ -3,7 +3,9 @@
     <div class="treeview js-treeview">
     <Tree :dataTree="trees" @edit-node = "showModal"/>
     </div>
-    <b-modal
+    <!-- <div>{{ flag }}</div> -->
+    
+    <!-- <b-modal 
       ref="modal-ref"
       title="Edit Tree Node"
       hide-footer
@@ -26,9 +28,10 @@
       </form>
       <div>
         <b-button
-          class=" ml-2 mt-3 float-right submitButton"
+          class=" ml-2 mt-3 float-right"
           variant="outline-primary"
           @click="submitModal"
+          id="submitButton"
            >
           Submit
         </b-button>
@@ -41,12 +44,15 @@
           Cancel
         </b-button>
       </div>
-    </b-modal>
+    </b-modal> -->
   </div>
 </template>
 
 <script>
+import Tree from '@/components/Tree.vue';
 export default {
+  components:{Tree,},
+  name:'Modal',
   data() {
     return {
       tree: {
@@ -61,22 +67,17 @@ export default {
   },
   computed: {
     trees() {
+      console.log(typeof(this.$store.state.trees))
       return this.$store.state.trees;
     },
   },
   methods: {
     showModal(node) {
-      Object.assign(this.tree, node);
-      delete this.tree.childrens;
-      this.$bvModal.show('my-modal');
+      // this.flag=1
+      // alert(this.flag)
+      // this.$emit('modal', node);
     },
-    hideModal() {
-      this.$bvModal.hide('my-modal');
-    },
-    submitModal() {
-      this.$store.dispatch('editNode', this.tree);
-      this.$bvModal.hide('my-modal');
-    },
+    
   },
 };
 </script>
