@@ -42,9 +42,6 @@
           </b-button>
           </div>
         </div>
-        <div v-if="flag===1">
-          <Modal :dataModal="node" @modal="openModal"/>
-        </div>
         <Tree :dataTree="node.childrens" @edit-node = "showModal"/>
       </li>
     </ul>
@@ -58,7 +55,6 @@ export default {
   name:'Tree',
   data() {
     return {
-      flag:0,
       tree: {
         id: '',
         label: 'abc',
@@ -67,7 +63,7 @@ export default {
       
     };
   },
-  props: ['dataTree','dataModal'],
+  props: ['dataTree'],
   methods: {
     addSame(node) {
       const newNode = {};
@@ -87,7 +83,7 @@ export default {
       this.$store.dispatch('deleteNode', id);
     },
     showModal(node) {
-      this.flag=1
+      console.log("ahithi gya")
       this.$emit('edit-node', node);
       
     },
