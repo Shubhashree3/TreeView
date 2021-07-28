@@ -52,6 +52,11 @@
 <script>
 import Modal from '@/components/Modal.vue';
 export default {
+  created() {
+    console.log('dataTree===',this.dataTree)
+    console.log('dataModal===',this.dataModal)
+
+  },
   name:'Tree',
   data() {
     return {
@@ -63,7 +68,7 @@ export default {
       
     };
   },
-  props: ['dataTree'],
+  props: ['dataTree',],
   methods: {
     addSame(node) {
       const newNode = {};
@@ -103,9 +108,6 @@ export default {
     },
     openMenu(id) {
       $(`#dropdown-${id}`).siblings().toggleClass('in');
-    },
-    openModal(node){
-      this.$emit('modal', node);
     }
   },
 };

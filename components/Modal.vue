@@ -10,6 +10,7 @@
     header-bg-variant="primary"
     header-text-variant="light"
     id="my-modal"
+    v-model="modalOpen"
     >
     <form ref="form">
       <b-form-group
@@ -47,6 +48,10 @@
 </template>
 <script>
 export default {
+  created(){
+    console.log(this.modalData)
+    this.openModal(this.modalData)
+  },
 	data() {
     return {
       node:{},
@@ -57,6 +62,7 @@ export default {
       },
     };
   },
+  props: ['modalOpen','modalData'],
   methods: {
     openModal(node) {
       console.log('hi')

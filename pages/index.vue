@@ -3,16 +3,19 @@
     <div class="treeview js-treeview">
     <Tree :dataTree="trees" @edit-node = "showModal"/>
     </div>
-    <div v-if="flag===1">
-      <Modal  :dataModal="modalData" @open-modal="openModal"/>
+    <div> {{flag}}</div>
+    <div v-if="flag==1">
+      <div>{{flag}}{{modalData}}</div>
+      <Modal modalOpne="flag" :modalData="modalData" @edit-node="showModal"/>
     </div>
   </div>
 </template>
 
 <script>
 import Tree from '@/components/Tree.vue';
+import Modal from '@/components/Modal.vue';
 export default {
-  components:{Tree,},
+  components:{Tree,Modal,},
   name:'Modal',
   data() {
     return {
