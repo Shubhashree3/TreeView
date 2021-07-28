@@ -23,13 +23,6 @@ jest.mock('axios', () => ({
   $get: jest.fn(() => Promise.resolve(mockData.data)),
   $post: jest.fn((node) => Promise.resolve(node)),
   $delete: jest.fn(() => Promise.resolve({})),
-  $put: jest.fn((node) => new Promise((resolve, reject) => {
-    if (mockpromiseState) {
-      resolve(node);
-    } else {
-      reject({});
-    }
-  })),
 }));
 
 describe('Tree', () => {
@@ -118,8 +111,6 @@ describe('Tree', () => {
 
     expect(toggleSpan.exists()).toBe(true);
     toggleSpan.trigger('click');
-
-    
   });
 
   it('is a Vue instance', () => {

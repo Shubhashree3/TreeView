@@ -60,5 +60,11 @@ module.exports = {
         "label": "Root 24",
         "parentId": 0
       }
-    ]
+    ],
+  "flag":true,
+  "dataModal":{
+      "id": 5,
+      "label": "Root 24",
+      "parentId": 0,    
   }
+}
