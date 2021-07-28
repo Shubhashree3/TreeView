@@ -2,23 +2,23 @@
   "trees": [
     {
       "id": 1,
-      "parentId": 0,
-      "label": "Root 1"
+      "label": "Root 1",
+      "parentId": 0
     },
     {
       "id": 2,
-      "parentId": 1,
-      "label": "Item 2.1"
+      "label": "Item 2.1",
+      "parentId": 1
     },
     {
       "id": 3,
-      "label": "Item 3.2.1",
+      "label": "Item 3.2",
       "parentId": 2
     },
     {
       "id": 4,
-      "parentId": 3,
-      "label": "Item 4.3"
+      "label": "Item 4.3",
+      "parentId": 3
     },
     {
       "id": 5,
@@ -29,16 +29,6 @@
       "id": 6,
       "parentId": 5,
       "label": "Item 6.5"
-    },
-    {
-      "id": 7,
-      "parentId": 2,
-      "label": "Item 7.2"
-    },
-    {
-      "id": 8,
-      "parentId": 7,
-      "label": "Item 8.7"
     }
   ]
 }

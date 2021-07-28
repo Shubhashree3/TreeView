@@ -84,7 +84,6 @@ export default {
       this.$store.dispatch('deleteNode', id);
     },
     showModal(node) {
-      console.log('ahithi gya');
       this.$emit('edit-node', node);
     },
     toggle(id) {

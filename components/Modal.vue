@@ -47,9 +47,7 @@
 export default {
   props: ['modalOpen', 'dataModal'],
   created() {
-    console.log('modalData===', this.dataModal);
-    console.log('modalOpen===', this.modalOpen);
-    return this.openModel;
+    return this.openTreeModal;
   },
   data() {
     return {
@@ -63,19 +61,16 @@ export default {
   computed: {
     model: {
       get() { return this.modalOpen; },
-      set() {},
+      set(value) { this.$emit('update-flag', value); },
     },
-    openModel: {
+    openTreeModal: {
       get() { return this.openModal(this.dataModal); },
-      set() {},
+      set() { },
     },
   },
   methods: {
     openModal() {
-      console.log('hi');
       Object.assign(this.tree, this.dataModal);
-      console.log('dataModal---', this.dataModal);
-      console.log('tree---', this.tree);
       delete this.tree.childrens;
       this.$bvModal.show('my-modal');
     },
@@ -85,6 +80,7 @@ export default {
     submitModal() {
       this.$store.dispatch('editNode', this.tree);
       this.$bvModal.hide('my-modal');
+      this.model = 0;
     },
   },
 };

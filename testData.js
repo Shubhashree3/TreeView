@@ -1,4 +1,5 @@
-module.exports = {"demoData": 
+module.exports = {
+  "demoData": 
   [
     {
       "id": 1,

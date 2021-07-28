@@ -4,7 +4,7 @@
       <Tree :dataTree="trees" @edit-node = "showModal"/>
     </div>
     <div v-if="flag==1">
-      <Modal :dataModal="modalData" :modalOpen="flag" />
+      <Modal :dataModal="modalData" :modalOpen="flag" @update-flag="toggleFlag"/>
     </div>
   </div>
 </template>
@@ -36,11 +36,11 @@ export default {
   },
   methods: {
     showModal(node) {
-      console.log('before flag', this.flag);
       this.flag = true;
-      console.log('after flag', this.flag);
       this.modalData = node;
-      console.log('Index modalData====', this.modalData);
+    },
+    toggleFlag() {
+      this.flag = false;
     },
   },
 };
