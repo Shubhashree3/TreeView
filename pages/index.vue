@@ -1,12 +1,10 @@
 <template>
   <div>
     <div class="treeview js-treeview">
-    <Tree :dataTree="trees" @edit-node = "showModal"/>
+      <Tree :dataTree="trees" @edit-node = "showModal"/>
     </div>
-    <div> {{flag}}</div>
     <div v-if="flag==1">
-      <div>{{flag}}{{modalData}}</div>
-      <Modal modalOpne="flag" :modalData="modalData" @edit-node="showModal"/>
+      <Modal :dataModal="modalData" :modalOpen="flag" />
     </div>
   </div>
 </template>
@@ -14,13 +12,15 @@
 <script>
 import Tree from '@/components/Tree.vue';
 import Modal from '@/components/Modal.vue';
+
 export default {
-  components:{Tree,Modal,},
-  name:'Modal',
+  created() {
+    this.$store.dispatch('fetchTree');
+  },
   data() {
     return {
-      flag:0,
-      modalData:{},
+      flag: false,
+      modalData: {},
       tree: {
         id: '',
         label: '',
@@ -28,28 +28,20 @@ export default {
       },
     };
   },
-  props: ['dataModal'],
-  created() {
-    this.$store.dispatch('fetchTree');
-  },
+  components: { Tree, Modal },
   computed: {
     trees() {
       return this.$store.state.trees;
     },
   },
   methods: {
-    openModal(node) {
-      console.log("openModal call thyu")
-      if(this.flag===1){
-        this.$emit('open-modal', node);
-      }
+    showModal(node) {
+      console.log('before flag', this.flag);
+      this.flag = true;
+      console.log('after flag', this.flag);
+      this.modalData = node;
+      console.log('Index modalData====', this.modalData);
     },
-    showModal(node){
-      console.log("ahi aavya")
-      this.flag=1
-      this.modalData=node
-    }
-    
   },
 };
 </script>

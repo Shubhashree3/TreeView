@@ -1,9 +1,11 @@
 <template>
   <div>
     <ul>
-      <li :id="node.id" v-for="node in dataTree" >
+      <li :id="node.id" v-for="node in dataTree" :key="node.id" >
         <div class="treeview__level" data-level="A">
-          <span class="level-title toggleSpan" @click="toggle(node.id)">{{node.label}}</span>
+          <span class="level-title toggleSpan" @click="toggle(node.id)">
+            {{node.label}}
+          </span>
           <div class="treeview__level-btns">
             <b-button
               variant="outline-danger"
@@ -46,18 +48,12 @@
       </li>
     </ul>
   </div>
-
-  </div>
 </template>
 <script>
-import Modal from '@/components/Modal.vue';
 export default {
   created() {
-    console.log('dataTree===',this.dataTree)
-    console.log('dataModal===',this.dataModal)
-
   },
-  name:'Tree',
+  name: 'Tree',
   data() {
     return {
       tree: {
@@ -65,10 +61,10 @@ export default {
         label: 'abc',
         parentId: '',
       },
-      
+
     };
   },
-  props: ['dataTree',],
+  props: ['dataTree'],
   methods: {
     addSame(node) {
       const newNode = {};
@@ -88,9 +84,8 @@ export default {
       this.$store.dispatch('deleteNode', id);
     },
     showModal(node) {
-      console.log("ahithi gya")
+      console.log('ahithi gya');
       this.$emit('edit-node', node);
-      
     },
     toggle(id) {
       const editButton = document.getElementById(`editButton-${id}`);
@@ -108,7 +103,7 @@ export default {
     },
     openMenu(id) {
       $(`#dropdown-${id}`).siblings().toggleClass('in');
-    }
+    },
   },
 };
 </script>
