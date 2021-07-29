@@ -6,7 +6,8 @@ export default {
   },
   editNode(store, newNode) {
     this.$axios.$put(`trees/${newNode.id}`, newNode)
-      .then(() => { store.dispatch('fetchTree'); });
+      .then(() => { store.dispatch('fetchTree'); })
+      .catch((error) => error);;
   },
   deleteNode(store, id) {
     this.$axios.$delete(`trees/${id}`)
@@ -21,7 +22,7 @@ export default {
               }
             });
           });
-      });
+      }).catch((error) => error);
   },
   fetchTree(store) {
     this.$axios.$get('trees')
@@ -46,6 +47,6 @@ export default {
         };
         translator(parents, childrens);
         store.commit('setTrees', parents);
-      });
+      }).catch((error) => error);
   },
 };

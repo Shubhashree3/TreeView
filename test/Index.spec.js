@@ -42,7 +42,7 @@ describe('Index', () => {
       store,
       localVue,
       stubs: {
-        FontAwesomeIcon: true, 'b-modal': true, 'b-form-group': true, 'b-form-input': true, 'b-button': true,
+        FontAwesomeIcon: true,'b-button': true,
       },
     });
   });

@@ -19,6 +19,7 @@ const mockpromiseState = true;
 
 localVue.use(Vuex);
 localVue.use(BootstrapVue);
+jest.useFakeTimers();
 
 jest.mock('axios', () => ({
   $get: jest.fn(() => Promise.resolve(mockData.f)),
@@ -48,8 +49,39 @@ describe('Modal', () => {
       },
     });
   });
+  it('should open modal', async () => {
+    await localVue.nextTick();
+    await flushPromises();
 
+    const openModal = wrapper.find('.testModal');    
+    expect(openModal.exists()).toBe(true);
+    expect(openModal.isVisible()).toBe(true);
+   
+  });
+   it('if click on cancel button in modal it should not call put api', async () => {
+    await localVue.nextTick();
+    await flushPromises();
 
+    const cancelButton = wrapper.find('#testCancelButton');
+    expect(cancelButton.exists()).toBe(true);
+    cancelButton.trigger('click');
+    
+    expect(axios.$put).toHaveBeenCalledTimes(0);
+  });
+  it('if click on submit button in modal', async () => {
+    await localVue.nextTick();
+    await flushPromises();
+
+    const submitButton = wrapper.find('#testSubmitButton');
+    expect(submitButton.exists()).toBe(true);
+    submitButton.trigger('click');
+   
+    expect(axios.$put).toHaveBeenCalledTimes(1);
+    await flushPromises();
+    expect(axios.$get).toHaveBeenCalledTimes(1);
+    
+  });
+    
   it('is a Vue instance', () => {
     expect(wrapper.vm).toBeTruthy();
   });

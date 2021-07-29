@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li :id="node.id" v-for="node in dataTree" :key="node.id" >
+      <li :id="node.id" v-for="node in dataTree" >
         <div class="treeview__level" data-level="A">
           <span class="level-title toggleSpan" @click="toggle(node.id)">
             {{node.label}}

@@ -7,6 +7,7 @@
       header-bg-variant="primary"
       header-text-variant="light"
       id="my-modal"
+      class="testModal"
       v-model="model"
       >
       <form ref="form">
@@ -27,12 +28,12 @@
           class=" ml-2 mt-3 float-right"
           variant="outline-primary"
           @click="submitModal"
-          id="submitButton"
+          id="testSubmitButton"
            >
           Submit
         </b-button>
         <b-button
-          id="toggle-btn"
+          id="testCancelButton"
           class=" mt-3 float-right cancelButton"
           variant="outline-danger"
           @click="hideModal"
@@ -76,9 +77,10 @@ export default {
     },
     hideModal() {
       this.$bvModal.hide('my-modal');
+      this.model = 0;
     },
     submitModal() {
-      this.$store.dispatch('editNode', this.tree);
+      this.$store.dispatch('editNode', this.tree).then().catch();
       this.$bvModal.hide('my-modal');
       this.model = 0;
     },

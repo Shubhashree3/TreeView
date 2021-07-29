@@ -38,7 +38,7 @@ describe('Tree', () => {
       propsData: { dataTree: mockData.demoData },
       localVue,
       stubs: {
-        FontAwesomeIcon: true, Tree: true, 'b-modal': true, 'b-form-group': true, 'b-form-input': true, 'b-button': true,
+        FontAwesomeIcon: true, Tree: true, 'b-button': true,
       },
     });
   });
