@@ -2,6 +2,7 @@
 
 import actions from '@/store/actions.js';
 import axios from 'axios';
+import BootstrapVue from 'bootstrap-vue';
 import Index from '@/pages/index.vue';
 import mockData from '@/testData.js';
 import Modal from '@/components/Modal.vue';
@@ -14,21 +15,12 @@ import Vuex from 'vuex';
 
 const flushPromises = require('flush-promises');
 const localVue = createLocalVue();
-const mockpromiseState = true;
 
 localVue.use(Vuex);
-localVue.component(Tree)
+localVue.use(BootstrapVue);
 
 jest.mock('axios', () => ({
   $get: jest.fn(() => Promise.resolve(mockData.data)),
-  $put: jest.fn((node) => new Promise((resolve, reject) => {
-    if (mockpromiseState) {
-      resolve(node);
-    } else {
-      reject({});
-    }
-  })),
-
 }));
 
 describe('Index', () => {
@@ -49,6 +41,19 @@ describe('Index', () => {
   it('All nodes should be loaded via api call to tree route', async () => {
     expect(axios.$get).toBeCalled();
     expect(axios.$get).toHaveBeenCalledWith('trees');
+  });
+  it('it emits expected data', async ()  => {
+    wrapper = mount(Modal, {
+      store,
+      localVue,
+      stubs: {
+        FontAwesomeIcon: true,'b-modal': true, 'b-form-group': true, 'b-form-input': true, 'b-button': true,
+      },
+    });
+    const modal = wrapper.findComponent(Modal)
+    modal.vm.toggleFlag('false') // We emit data
+    console.log(wrapper.emitted())
+    expect(wrapper.emitted().update_flag).toEqual(true) // Data is emitted with expected value 
   });
 
   it('is a Vue instance', () => {

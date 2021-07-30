@@ -4,7 +4,7 @@
       <Tree :dataTree="trees" @edit-node = "showModal"/>
     </div>
     <div v-if="flag==1">
-      <Modal :dataModal="modalData" :modalOpen="flag" @update-flag="toggleFlag"/>
+      <Modal :dataModal="modalData" :modalOpen="flag" @update_flag="toggleFlag"/>
     </div>
   </div>
 </template>

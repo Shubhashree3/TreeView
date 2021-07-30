@@ -3,38 +3,30 @@
 import actions from '@/store/actions.js';
 import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
-import $ from 'jquery';
 import mockData from '@/testData.js';
 import Modal from '@/components/Modal.vue';
 import mutations from '@/store/mutations.js';
 import { shallowMount, mount, createLocalVue } from '@vue/test-utils';
 import state from '@/store/state.js';
-import Tree from '@/components/Tree.vue';
 import Vuex from 'vuex';
 
-global.$ = $;
 const flushPromises = require('flush-promises');
 const localVue = createLocalVue();
 const mockpromiseState = true;
 
 localVue.use(Vuex);
 localVue.use(BootstrapVue);
-jest.useFakeTimers();
 
 jest.mock('axios', () => ({
   $get: jest.fn(() => Promise.resolve(mockData.f)),
   $put: jest.fn((node) => new Promise((resolve, reject) => {
-    if (mockpromiseState) {
-      resolve(node);
-    } else {
-      reject({});
-    }
+    if (mockpromiseState) {resolve(node);}
+    else {reject({});}
   })),
 }));
 
 describe('Modal', () => {
   let store;
-
   beforeEach(() => {
     store = new Vuex.Store({
       actions, mutations, state,
@@ -49,7 +41,10 @@ describe('Modal', () => {
       },
     });
   });
+  
   it('should open modal', async () => {
+    
+    console.log(wrapper)
     await localVue.nextTick();
     await flushPromises();
 
@@ -58,7 +53,8 @@ describe('Modal', () => {
     expect(openModal.isVisible()).toBe(true);
    
   });
-   it('if click on cancel button in modal it should not call put api', async () => {
+  
+  it('if click on cancel button in modal it should not call put api', async () => {
     await localVue.nextTick();
     await flushPromises();
 
@@ -68,6 +64,7 @@ describe('Modal', () => {
     
     expect(axios.$put).toHaveBeenCalledTimes(0);
   });
+  
   it('if click on submit button in modal', async () => {
     await localVue.nextTick();
     await flushPromises();
@@ -77,12 +74,20 @@ describe('Modal', () => {
     submitButton.trigger('click');
    
     expect(axios.$put).toHaveBeenCalledTimes(1);
+    let coolRegex=/[trees\/\d]/
+    expect(axios.$put).toBeCalledWith(expect.stringMatching(coolRegex),
+      expect.objectContaining({
+        id: expect.any(Number),
+        parentId: expect.any(Number),
+        label: expect.any(String),
+      }));
+
     await flushPromises();
-    expect(axios.$get).toHaveBeenCalledTimes(1);
-    
+    expect(axios.$get).toHaveBeenCalledTimes(1);  
   });
     
   it('is a Vue instance', () => {
     expect(wrapper.vm).toBeTruthy();
   });
+
 });

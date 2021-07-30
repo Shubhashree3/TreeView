@@ -62,7 +62,7 @@ export default {
   computed: {
     model: {
       get() { return this.modalOpen; },
-      set(value) { this.$emit('update-flag', value); },
+      set(value) { this.$emit('update_flag', value); },
     },
     openTreeModal: {
       get() { return this.openModal(this.dataModal); },

@@ -114,6 +114,7 @@ describe('Tree', () => {
   });
 
   it('is a Vue instance', () => {
+    console.log(wrapper)
     expect(wrapper.vm).toBeTruthy();
   });
 });
