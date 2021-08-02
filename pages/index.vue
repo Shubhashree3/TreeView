@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="treeview js-treeview">
-      <Tree :dataTree="trees" @edit-node = "showModal"/>
+      <Tree :dataTree="trees" @edit_node = "showModal"/>
     </div>
     <div v-if="flag==1">
       <Modal :dataModal="modalData" :modalOpen="flag" @update_flag="toggleFlag"/>

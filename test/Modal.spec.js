@@ -44,7 +44,6 @@ describe('Modal', () => {
   
   it('should open modal', async () => {
     
-    console.log(wrapper)
     await localVue.nextTick();
     await flushPromises();
 

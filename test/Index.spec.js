@@ -5,11 +5,11 @@ import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import Index from '@/pages/index.vue';
 import mockData from '@/testData.js';
-import Modal from '@/components/Modal.vue';
+// import Modal from '@/components/Modal.vue';
 import mutations from '@/store/mutations.js';
 import { mount, shallowMount,createLocalVue } from '@vue/test-utils';
 import state from '@/store/state.js';
-import Tree from '@/components/Tree.vue';
+// import Tree from '@/components/Tree.vue';
 
 import Vuex from 'vuex';
 
@@ -30,7 +30,7 @@ describe('Index', () => {
       actions, mutations, state,
     });
     store.$axios = axios;
-    global.wrapper = mount(Index, {
+    global.wrapper = shallowMount(Index, {
       store,
       localVue,
       stubs: {
@@ -38,22 +38,25 @@ describe('Index', () => {
       },
     });
   });
+
   it('All nodes should be loaded via api call to tree route', async () => {
     expect(axios.$get).toBeCalled();
     expect(axios.$get).toHaveBeenCalledWith('trees');
   });
-  it('it emits expected data', async ()  => {
-    wrapper = mount(Modal, {
-      store,
-      localVue,
-      stubs: {
-        FontAwesomeIcon: true,'b-modal': true, 'b-form-group': true, 'b-form-input': true, 'b-button': true,
-      },
-    });
-    const modal = wrapper.findComponent(Modal)
-    modal.vm.toggleFlag('false') // We emit data
-    console.log(wrapper.emitted())
-    expect(wrapper.emitted().update_flag).toEqual(true) // Data is emitted with expected value 
+
+  it('it emits expected data and call showModal method', async ()  => {
+    expect(wrapper.vm.flag).toBe(false);
+    wrapper.vm.$emit('edit_node')
+    expect(wrapper.emitted('edit_node')).toBeTruthy()
+    wrapper.vm.showModal(mockData.dataModal);
+    expect(wrapper.vm.flag).toBe(true);
+  });
+
+   it('it emits expected data and call toggleFlag method', async ()  => {
+    wrapper.vm.$emit('update_flag')
+    expect(wrapper.emitted('update_flag')).toBeTruthy()
+    wrapper.vm.toggleFlag();
+    expect(wrapper.vm.flag).toBe(false);
   });
 
   it('is a Vue instance', () => {

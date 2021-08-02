@@ -33,12 +33,12 @@ describe('Tree', () => {
       actions, mutations, state,
     });
     store.$axios = axios;
-    global.wrapper = mount(Tree, {
+    global.wrapper = shallowMount(Tree, {
       store,
       propsData: { dataTree: mockData.demoData },
       localVue,
       stubs: {
-        FontAwesomeIcon: true, Tree: true, 'b-button': true,
+        FontAwesomeIcon: true, 'b-button': true,
       },
     });
   });
@@ -90,8 +90,31 @@ describe('Tree', () => {
     expect(editNode.exists()).toBe(true);
     editNode.trigger('click');
 
-    expect(wrapper.emitted('edit-node')).toBeTruthy();
+    expect(wrapper.emitted('edit_node')).toBeTruthy();
   });
+
+  it('should toggle ', async () => {
+    await flushPromises();
+    let id=5
+    wrapper = mount(Tree, {
+      store,
+      propsData: { dataTree: mockData.demoData },
+      localVue,
+      stubs: {
+        FontAwesomeIcon: true, 'b-button': true,
+      },
+    });
+    const toggle = wrapper.find('.toggleSpan');
+    expect(toggle.exists()).toBe(true);
+    toggle.trigger('click');
+    wrapper.vm.toggle(id);
+    const addNode = wrapper.find('#dropdown-5');
+    expect(addNode.exists()).toBe(true);
+    expect(addNode.classes()).toContain('visible')
+
+    // wrapper.vm.toggle(id);
+  });
+
 
   it('Delete  a node when delete button preesed', async () => {
     await flushPromises();

@@ -9,14 +9,14 @@
           <div class="treeview__level-btns">
             <b-button
               variant="outline-danger"
-              class="deleteButton"
+              class="deleteButton "
               :id="`deleteButton-`+node.id"
               @click="deleteNode(node.id)">
               <FontAwesomeIcon :icon="['fas', 'trash']" />
             </b-button>
             <b-button
               variant="outline-primary"
-              class="editButton"
+              class="editButton notVisible"
               :id="`editButton-`+node.id"
               @click="showModal(node)">
               <FontAwesomeIcon :icon="['fas', 'pencil-alt']" />
@@ -24,7 +24,7 @@
             <b-button
               :id="`dropdown-`+node.id"
               variant="outline-success"
-              class="level-add"
+              class="level-add visible"
               @click="openMenu(node.id)">
               <FontAwesomeIcon :icon="['fas', 'plus']" />
             </b-button>
@@ -32,7 +32,7 @@
             :id="`addSame-`+node.id"
             variant="light"
             @click="addSame(node)"
-            class="level-same" >
+            class="level-same visible" >
             <span>Add Same Level</span>
           </b-button>
           <b-button
@@ -44,7 +44,7 @@
           </b-button>
           </div>
         </div>
-        <Tree :dataTree="node.childrens" @edit-node = "showModal"/>
+        <Tree :dataTree="node.childrens" @edit_node = "showModal"/>
       </li>
     </ul>
   </div>
@@ -84,20 +84,35 @@ export default {
       this.$store.dispatch('deleteNode', id);
     },
     showModal(node) {
-      this.$emit('edit-node', node);
+      this.$emit('edit_node', node);
     },
     toggle(id) {
+      console.log("here in toggle function")
       const editButton = document.getElementById(`editButton-${id}`);
       const deleteButton = document.getElementById(`deleteButton-${id}`);
       const dropdownButton = document.getElementById(`dropdown-${id}`);
-      if (editButton.style.display === 'none' || editButton.style.display === '') {
-        editButton.style.display = 'inherit';
-        deleteButton.style.display = 'inherit';
-        dropdownButton.style.display = 'none';
-      } else {
-        editButton.style.display = 'none';
-        deleteButton.style.display = 'none';
-        dropdownButton.style.display = 'inherit';
+      
+      if (! editButton.classList.contains("visible")) {
+        
+        editButton.classList.add("visible");
+        editButton.classList.remove("notVisible");
+
+        deleteButton.classList.add("visible");
+        deleteButton.classList.remove("notVisible");
+        
+        dropdownButton.classList.add("notVisible");
+        dropdownButton.classList.remove("visible");
+      } 
+      else {
+        
+        editButton.classList.remove("visible");
+        editButton.classList.add("notVisible");
+        
+        deleteButton.classList.remove("visible");
+        deleteButton.classList.add("notVisible");
+        
+        dropdownButton.classList.add("visible");
+        dropdownButton.classList.remove("notVisible");
       }
     },
     openMenu(id) {
@@ -106,3 +121,12 @@ export default {
   },
 };
 </script>
+<style type="text/css">
+.visible {
+  display: inherit;
+}
+
+.notVisible {
+  display: none;
+}
+</style>
