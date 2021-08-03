@@ -1,19 +1,15 @@
-// Import the `mount()` method from Vue Test Utils
-
 import actions from '@/store/actions.js';
 import axios from 'axios';
 import BootstrapVue from 'bootstrap-vue';
 import Index from '@/pages/index.vue';
 import mockData from '@/testData.js';
-// import Modal from '@/components/Modal.vue';
 import mutations from '@/store/mutations.js';
-import { mount, shallowMount,createLocalVue } from '@vue/test-utils';
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
 import state from '@/store/state.js';
-// import Tree from '@/components/Tree.vue';
-
 import Vuex from 'vuex';
 
 const flushPromises = require('flush-promises');
+
 const localVue = createLocalVue();
 
 localVue.use(Vuex);
@@ -34,7 +30,7 @@ describe('Index', () => {
       store,
       localVue,
       stubs: {
-        FontAwesomeIcon: true,'b-button': true,
+        FontAwesomeIcon: true, 'b-button': true, Tree: true, Modal: true,
       },
     });
   });
@@ -44,17 +40,17 @@ describe('Index', () => {
     expect(axios.$get).toHaveBeenCalledWith('trees');
   });
 
-  it('it emits expected data and call showModal method', async ()  => {
+  it('it emits expected data and call showModal method', async () => {
     expect(wrapper.vm.flag).toBe(false);
-    wrapper.vm.$emit('edit_node')
-    expect(wrapper.emitted('edit_node')).toBeTruthy()
+    wrapper.vm.$emit('edit_node');
+    expect(wrapper.emitted('edit_node')).toBeTruthy();
     wrapper.vm.showModal(mockData.dataModal);
     expect(wrapper.vm.flag).toBe(true);
   });
 
-   it('it emits expected data and call toggleFlag method', async ()  => {
-    wrapper.vm.$emit('update_flag')
-    expect(wrapper.emitted('update_flag')).toBeTruthy()
+  it('it emits expected data and call toggleFlag method', async () => {
+    wrapper.vm.$emit('update_flag');
+    expect(wrapper.emitted('update_flag')).toBeTruthy();
     wrapper.vm.toggleFlag();
     expect(wrapper.vm.flag).toBe(false);
   });

@@ -1,22 +1,22 @@
 <template>
   <div>
     <ul>
-      <li :id="node.id" v-for="node in dataTree" >
+      <li :id="node.id" v-for="node in dataTree" :key="node.id" >
         <div class="treeview__level" data-level="A">
-          <span class="level-title toggleSpan" @click="toggle(node.id)">
+          <span class="level-title toggleSpan" @click="toggle(node.id)" :id="`toggleSpan-`+node.id">
             {{node.label}}
           </span>
           <div class="treeview__level-btns">
             <b-button
               variant="outline-danger"
-              class="deleteButton "
+              :class="['deleteButton', {'visible': isEditable(node), 'notVisible': isNormal(node)}]"
               :id="`deleteButton-`+node.id"
               @click="deleteNode(node.id)">
               <FontAwesomeIcon :icon="['fas', 'trash']" />
             </b-button>
             <b-button
               variant="outline-primary"
-              class="editButton notVisible"
+              :class="['editButton', {'visible': isEditable(node), 'notVisible': isNormal(node)}]"
               :id="`editButton-`+node.id"
               @click="showModal(node)">
               <FontAwesomeIcon :icon="['fas', 'pencil-alt']" />
@@ -24,24 +24,24 @@
             <b-button
               :id="`dropdown-`+node.id"
               variant="outline-success"
-              class="level-add visible"
+              :class="['level-add', {'visible': isNormal(node), 'notVisible': isEditable(node)}]"
               @click="openMenu(node.id)">
               <FontAwesomeIcon :icon="['fas', 'plus']" />
             </b-button>
-          <b-button
-            :id="`addSame-`+node.id"
-            variant="light"
-            @click="addSame(node)"
-            class="level-same visible" >
-            <span>Add Same Level</span>
-          </b-button>
-          <b-button
-            variant="light"
-            @click="addSub(node)"
-            class="level-sub"
-            :id="`addSub-`+node.id">
-            <span>Add Sub Level</span>
-          </b-button>
+            <b-button
+              :id="`addSame-`+node.id"
+              variant="light"
+              @click="addSame(node)"
+              class="level-same" >
+              <span>Add Same Level</span>
+            </b-button>
+            <b-button
+              variant="light"
+              @click="addSub(node)"
+              class="level-sub"
+              :id="`addSub-`+node.id">
+              <span>Add Sub Level</span>
+            </b-button>
           </div>
         </div>
         <Tree :dataTree="node.childrens" @edit_node = "showModal"/>
@@ -56,9 +56,10 @@ export default {
   name: 'Tree',
   data() {
     return {
+      editables: [],
       tree: {
         id: '',
-        label: 'abc',
+        label: '',
         parentId: '',
       },
 
@@ -87,33 +88,18 @@ export default {
       this.$emit('edit_node', node);
     },
     toggle(id) {
-      console.log("here in toggle function")
-      const editButton = document.getElementById(`editButton-${id}`);
-      const deleteButton = document.getElementById(`deleteButton-${id}`);
-      const dropdownButton = document.getElementById(`dropdown-${id}`);
-      
-      if (! editButton.classList.contains("visible")) {
-        
-        editButton.classList.add("visible");
-        editButton.classList.remove("notVisible");
-
-        deleteButton.classList.add("visible");
-        deleteButton.classList.remove("notVisible");
-        
-        dropdownButton.classList.add("notVisible");
-        dropdownButton.classList.remove("visible");
-      } 
-      else {
-        
-        editButton.classList.remove("visible");
-        editButton.classList.add("notVisible");
-        
-        deleteButton.classList.remove("visible");
-        deleteButton.classList.add("notVisible");
-        
-        dropdownButton.classList.add("visible");
-        dropdownButton.classList.remove("notVisible");
+      const index = this.editables.indexOf(id);
+      if (index === -1) {
+        this.editables.push(id);
+      } else {
+        this.editables.splice(index, 1);
       }
+    },
+    isNormal(node) {
+      return (this.editables.indexOf(node.id) === -1);
+    },
+    isEditable(node) {
+      return !this.isNormal(node);
     },
     openMenu(id) {
       $(`#dropdown-${id}`).siblings().toggleClass('in');

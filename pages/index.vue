@@ -3,16 +3,13 @@
     <div class="treeview js-treeview">
       <Tree :dataTree="trees" @edit_node = "showModal"/>
     </div>
-    <div v-if="flag==1">
+    <div v-if="flag">
       <Modal :dataModal="modalData" :modalOpen="flag" @update_flag="toggleFlag"/>
     </div>
   </div>
 </template>
 
 <script>
-import Tree from '@/components/Tree.vue';
-import Modal from '@/components/Modal.vue';
-
 export default {
   created() {
     this.$store.dispatch('fetchTree');
@@ -28,7 +25,6 @@ export default {
       },
     };
   },
-  components: { Tree, Modal },
   computed: {
     trees() {
       return this.$store.state.trees;
