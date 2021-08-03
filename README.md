@@ -188,4 +188,16 @@ editNode action  will accept a node as argument and make axios put call.It takes
 deleteNode action receives id as argument and make axios delete call.It deletes the node with  that id. Then it searches nodes with parentId equal to id we received to delete(searching for the children of the deleted node) and make a recursive call to delete node with all the children found. So calling delete action on a node deletes the node with the tree attached to the node.
 
 
+## Testing
+   ### `Unit Testing`
+   Unit tests execute the smallest units of code in isolation, in order to increase ease of adding new features and track down bugs. Vue’s single-file components make it straight forward to write unit tests for components in isolation.
+  
+  ### `Run Test`
+  ```bash
+  # Running all test cases
+  $ npm test
 
+  # Run specific file for testing
+  $ npm test [fileName]
+  ``` 
+  ![Testing Screenshot](./assets/screenshots/TestCases.png?raw=true "Title")
