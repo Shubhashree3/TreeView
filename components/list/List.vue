@@ -10,6 +10,6 @@
 </script>
 <style scoped>
   .list {
-    background: #CCC;
+    background: #ccc;
   }
 </style>

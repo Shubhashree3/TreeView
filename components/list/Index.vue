@@ -15,6 +15,7 @@ export default {
   created() {
     this.$store.dispatch('fetchTree');
   },
+  name:'Modal',
   data() {
     return {
       flag: false,

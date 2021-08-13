@@ -12,6 +12,7 @@
 <script>
 export default {
   created() {
+    console.log(this.$store)
     this.$store.dispatch('fetchTree');
   },
   data() {

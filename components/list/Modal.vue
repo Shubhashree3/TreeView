@@ -49,8 +49,9 @@
 export default {
   props: ['modalOpen', 'dataModal'],
   created() {
-    // return this.openTreeModal;
+    return this.openTreeModal;
   },
+  name:'Modal',
   data() {
     return {
       tree: {
