@@ -7,6 +7,7 @@ import List from '../components/list/List.vue'
 import Tree from '../components/Tree.vue'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import '!style-loader!css-loader!../assets/main.css';
 
 
 import { library } from '@fortawesome/fontawesome-svg-core';
