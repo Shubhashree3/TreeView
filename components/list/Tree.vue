@@ -54,6 +54,7 @@ export default {
   created() {
   },
   name: 'Tree',
+  title:'Tree',
   data() {
     return {
       editables: [],

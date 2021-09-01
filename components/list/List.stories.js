@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { storiesOf } from '@storybook/vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import  {axios} from 'axios'
 import Tree from './Tree'
 import Modal from './Modal'
 import Index from './Index'
@@ -13,8 +13,14 @@ import store from '/home/shubhashree/storybook/TreeView/.storybook/store'
 storiesOf('Index', module)
   .add('Index vue', () => ({
     components:{Index},
+    title:'Index',
     subcomponents: { Tree,Modal },
     store:store,
+    argTypes: {
+      variant: {
+        control: { type: 'radio' }
+    }
+  },
     template:`
    <Index/>`,
   }))
