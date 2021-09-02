@@ -41,6 +41,7 @@ export default {
       ]
     }],
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/tailwindcss',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -63,4 +64,11 @@ export default {
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
   },
+  storybook: {
+    // Options
+    addons: [
+      '@storybook/addon-knobs',
+      '@storybook/addon-controls'
+    ]
+  }
 }
